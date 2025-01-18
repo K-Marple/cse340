@@ -4,3 +4,138 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  background-image: url(../images/site/small_check.jpg);
+  margin: 2rem;
+}
+
+header, nav, main, footer {
+  background-color: #fff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.siteName a {
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: #000;
+}
+
+#tools {
+  font-size: 1.25rem;
+  align-self: center;
+}
+
+#tools a {
+  text-decoration: none;
+  color: #000;
+}
+
+nav {
+  padding: 0.5rem;
+  align-content: center;
+  background-color: #FFB100;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0;
+}
+
+/* Edge of Tomorrow time stamp 46.32 */
+
+footer {
+  margin-top: -1rem;
+  padding-top: 1rem;
+}
+
+main {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  grid-column: 1/3;
+}
+
+.delor-box {
+  grid-column: 1/3;
+  position: relative;
+}
+
+.delor-img {
+  float: right;
+  margin-right: 1rem;
+  width: 80%;
+}
+
+.delorean {
+  background-color: rgba(255, 177, 0, 0.6);
+  padding: 0 1rem;
+  margin-left: 2rem;
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.delorean h2 {
+  font-size: 1.75rem;
+}
+
+.delorean p {
+  font-size: 1.25rem;
+}
+
+button {
+  padding: 1rem;
+  width: 80%;
+  margin: 0 10% 1rem 10%;
+  font-size: 1.25rem;
+}
+
+.upgrades {
+  grid-column: 1/2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.upgrades h3 {
+  grid-column: 1/3;
+}
+
+.flux, .decal, .sticker, .hubcap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.upgrades img {
+  height: 80px;
+  background-color: #FFB100;
+  padding: 0.5rem; 
+}
+
+.reviews {
+  grid-column: 2/3;
+}
+
+.upgrades h3, .reviews h3 {
+  padding: 1rem;
+  font-size: 1.25rem;
+}
