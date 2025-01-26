@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS public.account (
     account_lastname character varying NOT NULL,
     account_email character varying NOT NULL,
     account_password character varying NOT NULL,
-    account_tpye account_type NOT NULL DEFAULT 'Client'::account_type,
+    account_type account_type NOT NULL DEFAULT 'Client'::account_type,
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
 -- Data for table 'classification'
@@ -236,3 +236,15 @@ VALUES (
         'White',
         5
     );
+-- Update GM Hummer description
+UPDATE public.inventory
+SET inv_description = REPLACE(
+        inv_description,
+        'the small interiors',
+        'a huge interior'
+    )
+WHERE inv_id = 10;
+-- Update image and thumbnail to have /vehicles in the path
+UPDATE public.inventory
+SET inv_image = REPLACE(inv_image, 's/', 's/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, 's/', 's/vehicles/');
