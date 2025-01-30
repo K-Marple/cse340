@@ -1,0 +1,14 @@
+<!-- Content Heading -->
+<!-- Check for title and display in h1 if it exists -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<!-- Message Block -->
+<!-- # makes the message a comment, - allows messages to display -->
+<%# messages() %> 
+
+<!-- Main Content (Inventory) -->
+<%- grid %>
