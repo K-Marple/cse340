@@ -36,4 +36,13 @@ invCont.buildByInventoryId = async function (req, res, next) {
     })
 }
 
+invCont.buildFootError = async function (req, res, next) {
+    const message = 'Sorry, we are experiencing internal server issues.'
+    res.render("./inventory/detailErr", {
+        title: '500 Error',
+        message,
+        nav,
+    })
+}
+
 module.exports = invCont
