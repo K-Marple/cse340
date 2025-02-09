@@ -67,18 +67,17 @@ Util.buildInventoryGrid = async function(data){
       grid += '<img src="' + vehicle.inv_image
       + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model
       + ' on CSE Motors" />'
+      grid += '<div class="titlePrice">'
       grid += '<h2>' + vehicle.inv_year + ' ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model
-      grid += '</h2'
-      grid += '<div class="price">'
+      grid += '</h2>'
       grid += '<h2>' + '<span>$'
       + Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>' 
-      grid += '</h2>'
-      grid += '</div>'
+      grid += '</h2>' + '</div>'
       grid += '<div class="details">'
-      grid += '<p>Mileage: ' + Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '<br>'
-      + "Color: " + vehicle.inv_color + '<br>'
-      + "Description: " + vehicle.inv_description + '</p>'
+      grid += '<p>Mileage: ' + Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
+      + '<p>Color: ' + vehicle.inv_color + '</p>'
+      + '<p>Description: ' + vehicle.inv_description + '</p>'
       grid += '</div>'
     })
     grid += '</div>'

@@ -144,6 +144,23 @@ button {
   font-size: 1.25rem;
 }
 
+#inv-detail {
+  grid-column: 1/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#inv-detail img {
+  grid-column: 1/2;
+  grid-row: 1/3;
+  justify-self: center;
+}
+
+.titlePrice, .details {
+  grid-column: 2/3;
+  padding-left: 1rem;
+}
+
 @media screen and (max-width: 775px) {
   body {
     margin: 0;
@@ -196,5 +213,10 @@ button {
     margin: 0 20% 1rem 20%;
     width: 60%;
     font-size: 1rem;
+  }
+
+  #inv-detail {
+    display: flex;
+    flex-direction: column;
   }
 }
