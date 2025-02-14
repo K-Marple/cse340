@@ -161,7 +161,8 @@ button {
   padding-left: 1rem;
 }
 
-.login {
+.login, 
+.register {
   background-color: #FFB100;
   padding: 1rem;
   align-content: center;
@@ -169,18 +170,34 @@ button {
   border: 5px solid #000;
 }
 
-.login label {
+.login label, 
+.register label {
   display: block;
   padding-top: 1rem;
 }
 
-.login input[type="email"], .login input[type="password"] {
+.login input[type="email"], 
+.login input[type="password"],
+.register input[type="text"],
+.register input[type="email"],
+.register input[type="password"] {
   display: block;
   border: 1px solid;
   border-radius: 5px;
   padding: 0.8rem;
   width: 90%;
   max-width: 400px;
+}
+
+.login input[type="submit"],
+.register input[type="submit"] {
+  border: 2px solid;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 50%;
+  max-width: 300px;
+  background-color: #fff;
 }
 
 @media screen and (max-width: 775px) {
