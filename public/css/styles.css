@@ -161,6 +161,28 @@ button {
   padding-left: 1rem;
 }
 
+.login {
+  background-color: #FFB100;
+  padding: 1rem;
+  align-content: center;
+  justify-self: center;
+  border: 5px solid #000;
+}
+
+.login label {
+  display: block;
+  padding-top: 1rem;
+}
+
+.login input[type="email"], .login input[type="password"] {
+  display: block;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0.8rem;
+  width: 90%;
+  max-width: 400px;
+}
+
 @media screen and (max-width: 775px) {
   body {
     margin: 0;
