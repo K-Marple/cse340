@@ -189,6 +189,10 @@ button {
   max-width: 400px;
 }
 
+.passwordReqs {
+  font-size: 0.9rem;
+}
+
 .login input[type="submit"],
 .register input[type="submit"] {
   border: 2px solid;
