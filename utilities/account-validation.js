@@ -77,6 +77,66 @@ validate.checkRegData = async (req, res, next) => {
     next()
 }
 
+/* *****************
+* Login data validation rules
+* ******************/
+validate.loginRules = () => {
+    return [
+        // valid email is required and must already exist in database
+        body("account_email")
+            .trim()
+            .escape()
+            .notEmpty()
+            .isEmail()
+            .normalizeEmail() // refer to validator.js docs
+            .withMessage("A valid email is required.")
+            .custom(async (account_email) => {
+                const emailExists = await accModel.checkLoginEmail(account_email)
+                if (!emailExists){
+                  throw new Error("Email not registered. Please use a different email.")
+                }
+              }),
 
+        // password is required and must be strong password
+        body("account_password")
+            .trim()
+            .notEmpty()
+            .isStrongPassword({
+                minLength: 12,
+                minLowercase: 1,
+                minUppercase: 1,
+                minNumbers: 1,
+                minSymbols: 1,
+            })
+            .withMessage("Password does not meet the requirements.")
+            .custom(async (account_password) => {
+                const passwordExists = await accModel.checkLoginPass(account_password)
+                if (!passwordExists){
+                  throw new Error("Incorrect password.")
+                }
+              }),
+    ]
+}
+
+/* *****************
+* Check data and return errors or continue to login
+* ******************/
+validate.checkLoginData = async (req, res, next) => {
+    const {account_email, account_password} = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/login", {
+            errors,
+            title: "Login",
+            nav,
+            account_email,
+            account_password,
+        })
+        return
+    }
+    next()
+}
 
 module.exports = validate

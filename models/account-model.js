@@ -28,4 +28,27 @@ async function checkExistingEmail(account_email){
     }
 }
 
-module.exports = {registerAccount, checkExistingEmail}
+/* ***************
+* Check login information
+* ****************/
+async function checkLoginEmail(account_email){
+    try{
+        const sql = "SELECT * FROM account WHERE account_email = $1"
+        const login = await pool.query(sql, [account_email])
+        return login.rowCount
+    } catch (error) {
+        return error.message
+    }
+}
+
+async function checkLoginPass(account_password){
+    try{
+        const sql = "SELECT * FROM account WHERE account_password = $1"
+        const login = await pool.query(sql, [account_password])
+        return login.rowCount
+    } catch (error) {
+        return error.message
+    }
+}
+
+module.exports = {registerAccount, checkExistingEmail, checkLoginEmail, checkLoginPass}
