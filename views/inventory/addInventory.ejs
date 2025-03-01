@@ -1,0 +1,34 @@
+<!-- Title -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+    
+<!-- Message -->
+<% message %>
+    
+<!-- Main Content -->
+<form class="addInv" action="/inv/add-inventory" method="post">
+    <label>Classification</label>
+    <input type="" id="className" name="classification_name" value="<%= locals.classification_name %>" required>
+    <label>Make</label>
+    <input type="text" id="invMake" name="inv_make" value="<%= locals.inv_make %>" required>
+    <label>Model</label>
+    <input type="text" id="invModel" name="inv_model" value="<%= locals.inv_model %>" required>
+    <label>Year</label>
+    <input type="number" id="invYear" name="inv_year" value="<%= locals.inv_year %>" required>
+    <label>Price</label>
+    <input type="number" id="invPrice" name="inv_price" value="<%= locals.inv_price %>" required>
+    <label>Miles</label>
+    <input type="number" id="invMiles" name="inv_miles" value="<%= locals.inv_miles %>" required>
+    <label>Color</label>
+    <input type="text" id="invColor" name="inv_color" value="<%= locals.inv_color %>" required>
+    <label>Image Path</label>
+    <input type="text" id="invImage" name="inv_image" value="<%= locals.inv_image %>" required>
+    <label>Thumbnail Path</label>
+    <input type="text" id="invThumbnail" name="inv_thumbnail" value="<%= inv_thumbnail %>" required>
+    <label>Description</label>
+    <input type="text" id="invDescription" name="inv_description" value="<%= inv_description %>" required>
+    <input type="submit" value="Add to Inventory">
+</form>

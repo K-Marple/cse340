@@ -41,12 +41,60 @@ invCont.buildByInventoryId = async function (req, res, next) {
  * ******************** */
 invCont.buildManagement = async function(req, res, next) {
     let nav = await utilities.getNav()
-    const grid = await utilities.buildManagementGrid()
     res.render("./inventory/management", {
         title: 'Management',
         nav,
-        grid,
     })
+}
+
+/* ********************
+ * Build add classification view
+ * ******************** */
+invCont.buildAddClassification = async function(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("./inventory/addClassification", {
+        title: 'Add Classification',
+        nav,
+    })
+}
+
+/* ********************
+ * Build add inventory view
+ * ******************** */
+invCont.buildAddInventory = async function(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("./inventory/addInventory", {
+        title: 'Add Inventory',
+        nav,
+    })
+}
+
+/* ********************
+ * Process adding classification
+ * ******************** */
+async function addClassification(req, res) {
+    let nav = await utilities.getNav()
+    const classification_name = req.body
+    const classResult = await invModel.addClassification(classification_name)
+    if (classResult) {
+        req.flash(
+            "notice",
+            `You have added ${classification_name} classification.`
+        )
+        res.status(201).render("inventory/management", {
+            title: "Management",
+            nav,
+            errors: null,
+        })
+    } else {
+        req.flash("notice", "Sorry, unable to add classification.")
+        res.status(501).render("inventory/addClassification", {
+            title: "Add Classification",
+            nav,
+            errors,
+        }
+        )
+    }
 }
 
 // Error in footer
@@ -59,4 +107,4 @@ invCont.buildFootError = async function (req, res, next) {
     })
 }
 
-module.exports = invCont
+module.exports = {invCont, addClassification}
