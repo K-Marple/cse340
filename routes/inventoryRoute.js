@@ -9,6 +9,9 @@ router.get('/type/:classificationId', invController.buildByClassificationId);
 // Route to build specific inventory detail view
 router.get('/detail/:invId', invController.buildByInventoryId);
 
+// Route to management
+router.get('/', invController.buildManagement);
+
 // Route to 500 error
 router.get('/detail/500', invController.buildFootError);
 

@@ -85,6 +85,19 @@ Util.buildInventoryGrid = async function(data){
 }
 
 /* ************************
+ * Build management view
+ ************************** */
+Util.buildManagementGrid = async function (req, res, next) {
+  let grid = '<div class="management">'
+  grid += '<a href="../../inv/add-classification/">Add Classification</a>'
+  grid += '</br>'
+  grid += '<a href="../../inv/add-inventory/">Add Inventory</a>'
+  grid += '</div>'
+
+  return grid
+}
+
+/* ************************
  * Middleware for Handling Errors
  * Wrap other function in this for 
  * General Error Handling

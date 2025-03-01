@@ -36,6 +36,20 @@ invCont.buildByInventoryId = async function (req, res, next) {
     })
 }
 
+/* ********************
+ * Build management view
+ * ******************** */
+invCont.buildManagement = async function(req, res, next) {
+    let nav = await utilities.getNav()
+    const grid = await utilities.buildManagementGrid()
+    res.render("./inventory/management", {
+        title: 'Management',
+        nav,
+        grid,
+    })
+}
+
+// Error in footer
 invCont.buildFootError = async function (req, res, next) {
     const message = 'Sorry, we are experiencing internal server issues.'
     res.render("./inventory/detailErr", {
