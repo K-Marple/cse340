@@ -67,6 +67,5 @@ async function addInventory(classification_id, inv_make, inv_model, inv_year, in
   }
 }
 
-module.exports = {getClassifications, 
-  getInventoryByClassificationId, getInventoryByInventoryId,
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInventoryId, 
   addClassification, addInventory};

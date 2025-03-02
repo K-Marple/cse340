@@ -55,6 +55,7 @@ invCont.buildAddClassification = async function(req, res, next) {
     res.render("./inventory/addClassification", {
         title: 'Add Classification',
         nav,
+        errors: null,
     })
 }
 
@@ -66,6 +67,7 @@ invCont.buildAddInventory = async function(req, res, next) {
     res.render("./inventory/addInventory", {
         title: 'Add Inventory',
         nav,
+        errors: null,
     })
 }
 
@@ -97,6 +99,34 @@ async function addClassification(req, res) {
     }
 }
 
+/* ********************
+ * Process adding classification
+ * ******************** */
+async function addInventory(req, res) {
+    let nav = await utilities.getNav()
+    const {classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color} = req.body
+    const invResult = await invModel.addInventory(classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color)
+    if (invResult) {
+        req.flash(
+            "notice",
+            `You have added ${inv_make} ${inv_model} to the inventory.`
+        )
+        res.status(201).render("inventory/management", {
+            title: "Management",
+            nav,
+            errors: null,
+        })
+    } else {
+        req.flash("notice", "Sorry, unable to add inventory.")
+        res.status(501).render("inventory/addInventory", {
+            title: "Add Inventory",
+            nav,
+            errors,
+        }
+        )
+    }
+}
+
 // Error in footer
 invCont.buildFootError = async function (req, res, next) {
     const message = 'Sorry, we are experiencing internal server issues.'
@@ -107,4 +137,4 @@ invCont.buildFootError = async function (req, res, next) {
     })
 }
 
-module.exports = {invCont, addClassification}
+module.exports = invCont, {addClassification, addInventory}
