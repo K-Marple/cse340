@@ -74,7 +74,7 @@ invCont.buildAddInventory = async function(req, res, next) {
 /* ********************
  * Process adding classification
  * ******************** */
-async function addClassification(req, res) {
+invCont.addClassification = async function(req, res, next) {
     let nav = await utilities.getNav()
     const classification_name = req.body
     const classResult = await invModel.addClassification(classification_name)
@@ -102,7 +102,7 @@ async function addClassification(req, res) {
 /* ********************
  * Process adding classification
  * ******************** */
-async function addInventory(req, res) {
+invCont.addInventory = async function(req, res, next) {
     let nav = await utilities.getNav()
     const {classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color} = req.body
     const invResult = await invModel.addInventory(classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color)
@@ -137,4 +137,4 @@ invCont.buildFootError = async function (req, res, next) {
     })
 }
 
-module.exports = invCont, {addClassification, addInventory}
+module.exports = invCont

@@ -189,7 +189,7 @@ button {
   max-width: 400px;
 }
 
-.passwordReqs {
+.requirements {
   font-size: 0.9rem;
 }
 
@@ -202,6 +202,46 @@ button {
   width: 50%;
   max-width: 300px;
   background-color: #fff;
+}
+
+.management a {
+  display: block;
+  padding: 0.5rem;
+}
+
+.addClass,
+.addInv {
+  padding: 1rem;
+  border: 5px solid #000;
+  margin: 0 2rem;
+}
+
+.addClass label,
+.addInv label {
+  display: block;
+  padding-top: 1rem;
+}
+
+.addClass input[type="text"],
+.addInv input[type="text"],
+.addInv input[type="number"] {
+  display: block;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0.8rem;
+  width: 90%;
+  max-width: 400px;
+}
+
+.addClass input[type="submit"],
+.addInv input[type="submit"] {
+  border: 2px solid;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 50%;
+  max-width: 300px;
+  background-color: #FFB100;
 }
 
 @media screen and (max-width: 775px) {

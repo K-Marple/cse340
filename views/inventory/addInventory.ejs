@@ -6,18 +6,27 @@
 } %>
     
 <!-- Message -->
-<% message %>
+<%# message %>
+
+<!-- Errors -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
     
 <!-- Main Content -->
 <form class="addInv" action="/inv/add-inventory" method="post">
     <label>Classification</label>
-    <input type="" id="classId" name="classification_id" value="<%= locals.classification_name %>" required>
+    <!-- <input type="" id="classId" name="classification_id" value="<%= locals.classification_name %>" required> -->
     <label>Make</label>
     <input type="text" id="invMake" name="inv_make" value="<%= locals.inv_make %>" required>
     <label>Model</label>
     <input type="text" id="invModel" name="inv_model" value="<%= locals.inv_model %>" required>
     <label>Year</label>
-    <input type="number" id="invYear" name="inv_year" value="<%= locals.inv_year %>" required>
+    <input type="number" id="invYear" name="inv_year" value="<%= locals.inv_year %>" pattern="\d{4, 4}" required>
     <label>Price</label>
     <input type="number" id="invPrice" name="inv_price" value="<%= locals.inv_price %>" required>
     <label>Miles</label>
@@ -27,8 +36,8 @@
     <label>Image Path</label>
     <input type="text" id="invImage" name="inv_image" value="<%= locals.inv_image %>" required>
     <label>Thumbnail Path</label>
-    <input type="text" id="invThumbnail" name="inv_thumbnail" value="<%= inv_thumbnail %>" required>
+    <input type="text" id="invThumbnail" name="inv_thumbnail" value="<%= locals.inv_thumbnail %>" required>
     <label>Description</label>
-    <input type="text" id="invDescription" name="inv_description" value="<%= inv_description %>" required>
+    <input type="text" id="invDescription" name="inv_description" value="<%= locals.inv_description %>" required>
     <input type="submit" value="Add to Inventory">
 </form>

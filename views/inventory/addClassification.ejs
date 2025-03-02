@@ -7,6 +7,15 @@
     
 <!-- Message -->
 <% message %>
+
+<!-- Errors -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
     
 <!-- Main Content -->
 <form class="addClass" action="/inv/add-classification" method="post">
