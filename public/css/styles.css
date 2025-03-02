@@ -171,7 +171,9 @@ button {
 }
 
 .login label, 
-.register label {
+.register label,
+.addClass label,
+.addInv label {
   display: block;
   padding-top: 1rem;
 }
@@ -180,7 +182,11 @@ button {
 .login input[type="password"],
 .register input[type="text"],
 .register input[type="email"],
-.register input[type="password"] {
+.register input[type="password"],
+.addClass input[type="text"],
+.addInv input[type="text"],
+.addInv input[type="number"],
+#classificationList {
   display: block;
   border: 1px solid;
   border-radius: 5px;
@@ -214,23 +220,6 @@ button {
   padding: 1rem;
   border: 5px solid #000;
   margin: 0 2rem;
-}
-
-.addClass label,
-.addInv label {
-  display: block;
-  padding-top: 1rem;
-}
-
-.addClass input[type="text"],
-.addInv input[type="text"],
-.addInv input[type="number"] {
-  display: block;
-  border: 1px solid;
-  border-radius: 5px;
-  padding: 0.8rem;
-  width: 90%;
-  max-width: 400px;
 }
 
 .addClass input[type="submit"],
