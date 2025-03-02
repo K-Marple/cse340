@@ -1,8 +1,8 @@
 // Needed Resources
 const express = require('express')
 const router = new express.Router()
-const invController = require('../controllers/invController')
 const utilities = require('../utilities')
+const invController = require('../controllers/invController')
 const invValidate = require('../utilities/inv-validation')
 
 // Route to build inventory by classification view
