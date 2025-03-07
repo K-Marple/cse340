@@ -5,6 +5,15 @@
         res.redirect('/')
     } %>
 
+<!-- Errors -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
 <!-- Form -->
 <form class="login" action="/account/login" method="post">
     <label>Email</label>
