@@ -112,7 +112,11 @@ async function accountLogin(req, res) {
       if (process.env.NODE_ENV === "development") {
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
       } else {
-        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+        res.cookie("jwt", accessToken, {
+          httpOnly: true,
+          secure: true,
+          maxAge: 3600 * 1000,
+        });
       }
       return res.redirect("/account/");
     } else {
@@ -133,12 +137,12 @@ async function accountLogin(req, res) {
 }
 
 /* ********************
- * Deliver default view
+ * Deliver management view
  ***********************/
-async function buildAccountDefault(req, res, next) {
+async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav();
-  res.render("account/", {
-    title: "Account",
+  res.render("/account/", {
+    title: "Account Management",
     nav,
     errors: null,
   });
@@ -149,5 +153,5 @@ module.exports = {
   buildRegistration,
   registerAccount,
   accountLogin,
-  buildAccountDefault,
+  buildAccountManagement,
 };

@@ -6,7 +6,10 @@ const accController = require("../controllers/accountController");
 const regValidate = require("../utilities/account-validation");
 
 // Default route
-router.get("/", utilities.handleErrors(accController.buildAccountDefault));
+router.get(
+  "/accManagement",
+  utilities.handleErrors(accController.buildAccountManagement)
+);
 
 // Build login
 router.get("/login", utilities.handleErrors(accController.buildLogin));

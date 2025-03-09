@@ -54,7 +54,7 @@ async function checkLoginEmail(account_email) {
 
 async function checkLoginPass(account_password) {
   try {
-    const sql = "SELECT * FROM account WHERE account_password = $1";
+    const sql = "SELECT * FROM account WHERE account_email = $1";
     const login = await pool.query(sql, [account_password]);
     return login.rowCount;
   } catch (error) {
