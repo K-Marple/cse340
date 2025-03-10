@@ -7,7 +7,8 @@ const regValidate = require("../utilities/account-validation");
 
 // Default route
 router.get(
-  "/accManagement",
+  "/",
+  utilities.checkLogin,
   utilities.handleErrors(accController.buildAccountManagement)
 );
 
