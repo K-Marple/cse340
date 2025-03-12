@@ -5,11 +5,11 @@ const utilities = require("../utilities");
 const accController = require("../controllers/accountController");
 const regValidate = require("../utilities/account-validation");
 
-// Default route
+// Management route
 router.get(
   "/",
   utilities.checkLogin,
-  utilities.handleErrors(accController.buildAccountManagement)
+  utilities.handleErrors(accController.buildManagement)
 );
 
 // Build login
