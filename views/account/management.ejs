@@ -6,11 +6,7 @@
     } %>
 
 <!-- Messages -->
-<% if(message) {%>
-    <ul class="message">
-        <% message %>
-    </ul>
-<% } %>
+<%- messages() %>
 
 <!-- Errors -->
 <% if (errors) { %>
