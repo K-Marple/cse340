@@ -175,9 +175,7 @@ invCont.buildEditInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
   const data = await invModel.getInventoryByInventoryId(inv_id);
   const list = await utilities.buildClassificationList();
-  const itemName = `${data.inv_make} ${data.inv_model}`;
-  console.log(data.inv_make);
-  console.log(data.inv_model);
+  const itemName = `${data[0].inv_make} ${data[0].inv_model}`;
   res.render("./inventory/editInventory", {
     title: "Edit " + itemName,
     nav,
