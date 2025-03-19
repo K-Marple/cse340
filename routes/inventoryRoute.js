@@ -48,6 +48,14 @@ router.get(
   utilities.handleErrors(invController.buildEditInventory)
 );
 
+// Process edit inventory
+router.post(
+  "/update/",
+  invValidate.invRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+);
+
 // Route to 500 error
 router.get("/detail/500", invController.buildFootError);
 

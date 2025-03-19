@@ -41,11 +41,11 @@ invCont.buildByInventoryId = async function (req, res, next) {
  * ******************** */
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav();
-  const list = await utilities.buildClassificationList();
+  const classificationSelect = await utilities.buildClassificationList();
   res.render("./inventory/management", {
     title: "Management",
     nav,
-    list,
+    classificationSelect,
     errors: null,
   });
 };
@@ -67,11 +67,11 @@ invCont.buildAddClassification = async function (req, res, next) {
  * ******************** */
 invCont.buildAddInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
-  const list = await utilities.buildClassificationList();
+  const classificationSelect = await utilities.buildClassificationList();
   res.render("./inventory/addInventory", {
     title: "Add Inventory",
     nav,
-    list,
+    classificationSelect,
     errors: null,
   });
 };
@@ -104,7 +104,7 @@ invCont.addClassification = async function (req, res, next) {
 };
 
 /* ********************
- * Process adding classification
+ * Process adding inventory
  * ******************** */
 invCont.addInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
@@ -174,25 +174,88 @@ invCont.buildEditInventory = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
   const data = await invModel.getInventoryByInventoryId(inv_id);
-  const list = await utilities.buildClassificationList();
+  const classificationSelect = await utilities.buildClassificationList(
+    data[0].classification_id
+  );
   const itemName = `${data[0].inv_make} ${data[0].inv_model}`;
   res.render("./inventory/editInventory", {
     title: "Edit " + itemName,
     nav,
-    list: list,
+    classificationSelect,
     errors: null,
-    inv_id: data.inv_id,
-    inv_make: data.inv_make,
-    inv_model: data.inv_model,
-    inv_year: data.inv_year,
-    inv_description: data.inv_description,
-    inv_image: data.inv_image,
-    inv_thumbnail: data.inv_thumbnail,
-    inv_price: data.inv_price,
-    inv_miles: data.inv_miles,
-    inv_color: data.inv_color,
-    classification_id: data.classification_id,
+    inv_id: data[0].inv_id,
+    inv_make: data[0].inv_make,
+    inv_model: data[0].inv_model,
+    inv_year: data[0].inv_year,
+    inv_description: data[0].inv_description,
+    inv_image: data[0].inv_image,
+    inv_thumbnail: data[0].inv_thumbnail,
+    inv_price: data[0].inv_price,
+    inv_miles: data[0].inv_miles,
+    inv_color: data[0].inv_color,
+    classification_id: data[0].classification_id,
   });
+};
+
+/* ********************
+ * Process updating inventory
+ * ******************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const {
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+  } = req.body;
+  console.log(req.body);
+  const updateResult = await invModel.updateInventory(
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color
+  );
+  if (updateResult) {
+    const itemName = inv_make + " " + inv_model;
+    req.flash("notice", `The ${itemName} was sucessfully updated.`);
+    res.redirect("/inv/");
+  } else {
+    const classificationSelect = await utilities.buildClassificationList(
+      classification_id
+    );
+    req.flash("notice", "Sorry, the insert failed.");
+    res.status(501).render("inventory/editInventory", {
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect,
+      errors: null,
+      inv_id,
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+    });
+  }
 };
 
 // Error in footer
