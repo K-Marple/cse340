@@ -56,6 +56,15 @@ router.post(
   utilities.handleErrors(invController.updateInventory)
 );
 
+// Route to delete inventory
+router.get(
+  "/delete/:inv_id",
+  utilities.handleErrors(invController.buildDeleteInventory)
+);
+
+// Process delete inventory
+router.post("/deleted/", utilities.handleErrors(invController.deleteInventory));
+
 // Route to 500 error
 router.get("/detail/500", invController.buildFootError);
 

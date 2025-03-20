@@ -133,6 +133,9 @@ invCont.addInventory = async function (req, res, next) {
     inv_color
   );
   if (invResult) {
+    const classificationSelect = await utilities.buildClassificationList(
+      classification_id
+    );
     req.flash(
       "notice",
       `You have added ${inv_make} ${inv_model} to the inventory.`
@@ -141,6 +144,7 @@ invCont.addInventory = async function (req, res, next) {
       title: "Management",
       nav,
       errors: null,
+      classificationSelect,
     });
   } else {
     req.flash("notice", "Sorry, unable to add inventory.");
@@ -215,7 +219,6 @@ invCont.updateInventory = async function (req, res, next) {
     inv_miles,
     inv_color,
   } = req.body;
-  console.log(req.body);
   const updateResult = await invModel.updateInventory(
     inv_id,
     classification_id,
@@ -254,6 +257,53 @@ invCont.updateInventory = async function (req, res, next) {
       inv_price,
       inv_miles,
       inv_color,
+    });
+  }
+};
+
+/* ********************
+ * Build delete inventory view
+ * ******************** */
+invCont.buildDeleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id);
+  let nav = await utilities.getNav();
+  const data = await invModel.getInventoryByInventoryId(inv_id);
+  const itemName = `${data[0].inv_make} ${data[0].inv_model}`;
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: data[0].inv_id,
+    inv_make: data[0].inv_make,
+    inv_model: data[0].inv_model,
+    inv_year: data[0].inv_year,
+    inv_price: data[0].inv_price,
+  });
+};
+
+/* ********************
+ * Process deleting inventory
+ * ******************** */
+invCont.deleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const inv_id = parseInt(req.body.inv_id);
+  const deleteResult = await invModel.deleteInventoryItem(inv_id);
+  const data = await invModel.getInventoryByInventoryId(inv_id);
+  const itemName = `${data.inv_make} ${data.inv_model}`;
+  if (deleteResult) {
+    req.flash("notice", `The ${itemName} was sucessfully deleted.`);
+    res.redirect("/inv/");
+  } else {
+    req.flash("notice", "Sorry, we were unable to process the deletion.");
+    res.status(501).render("inventory/delete-confirm", {
+      title: "Delete " + itemName,
+      nav,
+      errors: null,
+      inv_id,
+      inv_make: data[0].inv_make,
+      inv_model: data[0].inv_model,
+      inv_year: data[0].inv_year,
+      inv_price: data[0].inv_price,
     });
   }
 };
