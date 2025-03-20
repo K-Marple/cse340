@@ -18,7 +18,7 @@
 <% } %>
     
 <!-- Main Content -->
-<form class="editInv" action="/inv/update" method="post">
+<form id="updateForm" class="editInv" action="/inv/update" method="post">
     <label>Classification</label>
     <%- classificationSelect %>
     <label>Make</label>
@@ -39,8 +39,10 @@
     <input type="text" id="invThumbnail" name="inv_thumbnail" value="<%= locals.inv_thumbnail %>" required>
     <label>Description</label>
     <input type="text" id="invDescription" name="inv_description" value="<%= locals.inv_description %>" required>
-    <input type="submit" value="Edit Vehicle">
+    <input type="submit" value="Edit Vehicle" disabled>
     <input type="hidden" name="inv_id"
     <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
     <% } %>>
 </form>
+
+<script src="../../js/inv-update.js"></script>
