@@ -37,4 +37,16 @@ router.post(
   utilities.handleErrors(accController.accountLogin)
 );
 
+// Build update information
+router.get("/update", utilities.handleErrors(accController.buildUpdateAccount));
+
+// Process update account attempt
+router.post(
+  "/update-account",
+  regValidate.registrationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accController.updateAccount),
+  utilities.handleErrors(accController.changePassword)
+);
+
 module.exports = router;

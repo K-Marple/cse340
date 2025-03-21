@@ -148,10 +148,98 @@ async function buildManagement(req, res, next) {
   });
 }
 
+/* ********************
+ * Deliver update view
+ ***********************/
+async function buildUpdateAccount(req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("account/update", {
+    title: "Update Account",
+    nav,
+    errors: null,
+  });
+}
+
+/* ********************
+ * Process update account
+ ***********************/
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav();
+  const { account_firstname, account_lastname, account_email } = req.body;
+  const accountData = await accModel.getAccountById(account_id);
+  const updateResult = await accModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email
+  );
+
+  if (updateResult) {
+    req.flash("notice", `You\'re account has been updated.`);
+    res.status(201).render("account/management", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, the update process failed.");
+    res.status(501).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors,
+    });
+  }
+}
+
+/* ********************
+ * Process password change
+ ***********************/
+async function changePassword(req, res) {
+  let nav = await utilities.getNav();
+  const { account_password } = req.body;
+
+  // Hash password
+  let hashedPassword;
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10);
+  } catch (error) {
+    req.flash(
+      "notice",
+      "Sorry, there was an error processing the password change."
+    );
+    res.status(500).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: null,
+    });
+  }
+
+  const passwordResult = await accModel.changePassword(hashedPassword);
+
+  if (passwordResult) {
+    req.flash("notice", `You have changed your password.`);
+    res.status(201).render("account/management", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, unable to change password.");
+    res.status(501).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors,
+    });
+  }
+}
+
 module.exports = {
   buildLogin,
   buildRegistration,
   registerAccount,
   accountLogin,
   buildManagement,
+  buildUpdateAccount,
+  updateAccount,
+  changePassword,
 };

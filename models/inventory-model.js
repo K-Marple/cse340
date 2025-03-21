@@ -110,7 +110,6 @@ async function updateInventory(
   inv_miles,
   inv_color
 ) {
-  console.log(inv_id);
   try {
     const sql = `UPDATE public.inventory 
       SET inv_make = $1, inv_model = $2, 
