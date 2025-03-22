@@ -165,8 +165,8 @@ async function buildUpdateAccount(req, res, next) {
  ***********************/
 async function updateAccount(req, res) {
   let nav = await utilities.getNav();
-  const { account_firstname, account_lastname, account_email } = req.body;
-  const accountData = await accModel.getAccountById(account_id);
+  const { account_firstname, account_lastname, account_email, account_id } =
+    req.body;
   const updateResult = await accModel.updateAccount(
     account_firstname,
     account_lastname,

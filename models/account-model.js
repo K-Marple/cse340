@@ -116,7 +116,7 @@ async function updateAccount(
       account_email,
       account_id,
     ]);
-    return data.rows[0];
+    return data;
   } catch (error) {
     console.error("Error in update model: " + error);
   }

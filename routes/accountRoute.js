@@ -43,8 +43,8 @@ router.get("/update", utilities.handleErrors(accController.buildUpdateAccount));
 // Process update account attempt
 router.post(
   "/update-account",
-  regValidate.registrationRules(),
-  regValidate.checkRegData,
+  regValidate.updateRules(),
+  regValidate.checkUpdateData,
   utilities.handleErrors(accController.updateAccount),
   utilities.handleErrors(accController.changePassword)
 );
