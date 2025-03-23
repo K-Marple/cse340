@@ -243,6 +243,15 @@ button {
   padding: 0.5rem;
 }
 
+.welcome-msg {
+  grid-column: 1/3;
+}
+
+.update-box,
+.inv-manage-box {
+  float: left;
+}
+
 .addClass,
 .addInv {
   padding: 1rem;
