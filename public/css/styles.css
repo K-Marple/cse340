@@ -173,7 +173,9 @@ button {
 .login label, 
 .register label,
 .addClass label,
-.addInv label {
+.addInv label,
+.updateAccount label,
+.changePassword label {
   display: block;
   padding-top: 1rem;
 }
@@ -186,7 +188,10 @@ button {
 .addClass input[type="text"],
 .addInv input[type="text"],
 .addInv input[type="number"],
-#classificationList {
+#classificationList,
+.updateAccount input[type="text"],
+.updateAccount input[type="email"],
+.changePassword input[type="password"] {
   display: block;
   border: 1px solid;
   border-radius: 5px;
@@ -200,7 +205,9 @@ button {
 }
 
 .login input[type="submit"],
-.register input[type="submit"] {
+.register input[type="submit"],
+.updateAccount input[type="submit"],
+.changePassword input[type="submit"] {
   border: 2px solid;
   border-radius: 10px;
   margin-top: 1rem;
@@ -208,6 +215,27 @@ button {
   width: 50%;
   max-width: 300px;
   background-color: #fff;
+}
+
+.updateAccount input[type="submit"],
+.changePassword input[type="submit"] {
+  background-color: #FFB100;
+}
+
+.updateAccount fieldset,
+.changePassword fieldset {
+  border: 6px double #FFB100;
+  border-radius: 1rem;
+}
+
+.updateAccount legend,
+.changePassword legend {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.changePassword {
+  margin-top: 1.5rem;
 }
 
 .managementLinks a {

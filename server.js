@@ -70,7 +70,7 @@ app.use("/inv", inventoryRoute);
 app.use("/account", accountRoute);
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({ status: 404, message: "You look lost. Recalculating...", img });
+  next({ status: 404, message: "You look lost. Recalculating..." });
 });
 
 /* ***********************
@@ -82,7 +82,6 @@ app.use(async (err, req, res, next) => {
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
   if (err.status == 404) {
     message = err.message;
-    img = err.img;
   } else {
     message = "Oh no! There was a crash. Maybe try a different route?";
   }
@@ -90,7 +89,6 @@ app.use(async (err, req, res, next) => {
     title: err.status || "Server Error",
     message,
     nav,
-    img,
   });
 });
 
