@@ -226,13 +226,4 @@ Util.checkAccount = async function (req, res, next) {
   }
 };
 
-/* ********************
- * Process logout request
- ***********************/
-Util.checkLogout = (req, res, next) => {
-  if (req.cookies.jwt) {
-    res.clearCookie("jwt");
-  }
-};
-
 module.exports = Util;
