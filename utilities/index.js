@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const accModel = require("../models/account-model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Util = {};
@@ -189,6 +190,48 @@ Util.checkLogin = (req, res, next) => {
   } else {
     req.flash("notice", "Please log in.");
     return res.redirect("/account/login");
+  }
+};
+
+/* ************************
+ * Middleware to check token validity and account type
+ * ************************ */
+Util.checkAccount = async function (req, res, next) {
+  const account_id = parseInt(res.locals.accountData.account_id);
+  const data = await accModel.getAccountById(account_id);
+  console.log(account_id);
+  console.log(data.account_type);
+  if (data.account_type == "Employee" || data.account_type == "Admin") {
+    if (req.cookies.jwt) {
+      jwt.verify(
+        req.cookies.jwt,
+        process.env.ACCESS_TOKEN_SECRET,
+        function (err, accountData) {
+          if (err) {
+            req.flash("Please log in");
+            res.clearCookie("jwt");
+            return res.redirect("/account/login");
+          }
+          res.locals.accountData = accountData;
+          res.locals.loggedin = 1;
+          next();
+        }
+      );
+    } else {
+      next();
+    }
+  } else {
+    req.flash("Unauthorized Access.");
+    res.redirect("/");
+  }
+};
+
+/* ********************
+ * Process logout request
+ ***********************/
+Util.checkLogout = (req, res, next) => {
+  if (req.cookies.jwt) {
+    res.clearCookie("jwt");
   }
 };
 

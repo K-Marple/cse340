@@ -4,7 +4,7 @@
     </span>
     <div id="tools">
         <% if(locals.loggedin) { %> 
-            <a title="Welcome" href="/">Welcome <%= locals.accountData.account_firstname %></a>
+            <a title="Welcome" href="/account/">Welcome <%= locals.accountData.account_firstname %></a>
             <a title="logout" href="/">Logout</a>
         <% } else { %>
             <a title="Click to log in" href="/account/login">My Account</a>

@@ -12,19 +12,28 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildByInventoryId);
 
 // Route to management
-router.get("/", invController.buildManagement);
+router.get("/", utilities.checkAccount, invController.buildManagement);
 
 // Route to add classification
-router.get("/add-classification", invController.buildAddClassification);
+router.get(
+  "/add-classification",
+  utilities.checkAccount,
+  invController.buildAddClassification
+);
 
 // Route to add inventory
-router.get("/add-inventory", invController.buildAddInventory);
+router.get(
+  "/add-inventory",
+  utilities.checkAccount,
+  invController.buildAddInventory
+);
 
 // Process add classification attempt
 router.post(
   "/add-classification",
   invValidate.classRules(),
   invValidate.checkClassData,
+  utilities.checkAccount,
   utilities.handleErrors(invController.addClassification)
 );
 
@@ -33,6 +42,7 @@ router.post(
   "/add-inventory",
   invValidate.invRules(),
   invValidate.checkInvData,
+  utilities.checkAccount,
   utilities.handleErrors(invController.addInventory)
 );
 
@@ -45,6 +55,7 @@ router.get(
 // Route to edit inventory
 router.get(
   "/edit/:inv_id",
+  utilities.checkAccount,
   utilities.handleErrors(invController.buildEditInventory)
 );
 
@@ -53,17 +64,23 @@ router.post(
   "/update/",
   invValidate.invRules(),
   invValidate.checkUpdateData,
+  utilities.checkAccount,
   utilities.handleErrors(invController.updateInventory)
 );
 
 // Route to delete inventory
 router.get(
   "/delete/:inv_id",
+  utilities.checkAccount,
   utilities.handleErrors(invController.buildDeleteInventory)
 );
 
 // Process delete inventory
-router.post("/deleted/", utilities.handleErrors(invController.deleteInventory));
+router.post(
+  "/deleted/",
+  utilities.checkAccount,
+  utilities.handleErrors(invController.deleteInventory)
+);
 
 // Route to 500 error
 router.get("/detail/500", invController.buildFootError);

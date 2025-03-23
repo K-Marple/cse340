@@ -167,6 +167,7 @@ async function updateAccount(req, res) {
   let nav = await utilities.getNav();
   const { account_firstname, account_lastname, account_email, account_id } =
     req.body;
+  const accountData = await accModel.getAccountById(account_id);
   const updateResult = await accModel.updateAccount(
     account_firstname,
     account_lastname,
@@ -179,6 +180,7 @@ async function updateAccount(req, res) {
       title: "Account Management",
       nav,
       errors: null,
+      accountData,
     });
   } else {
     req.flash("notice", "Sorry, the update process failed.");
