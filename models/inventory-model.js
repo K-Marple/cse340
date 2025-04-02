@@ -1,3 +1,4 @@
+const { searchInventory } = require("../controllers/invController");
 const pool = require("../database/");
 
 /* ***************************
@@ -163,6 +164,22 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
+/* ***************************
+ * Get all inventory items by inv_make or inv_model
+ * ************************** */
+async function getInventoryByMakeOrModel(inv_make, inv_model) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory
+      WHERE inv_make = $1 OR inv_model = $2`,
+      [inv_make, inv_model]
+    );
+    return data.rows;
+  } catch (error) {
+    console.error("getmakemodel error " + error);
+  }
+}
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -171,4 +188,5 @@ module.exports = {
   addInventory,
   updateInventory,
   deleteInventoryItem,
+  getInventoryByMakeOrModel,
 };

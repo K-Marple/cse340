@@ -82,6 +82,12 @@ router.post(
   utilities.handleErrors(invController.deleteInventory)
 );
 
+// Route to search inventory
+router.get(
+  "/search/",
+  utilities.handleErrors(invController.buildSearchInventory)
+);
+
 // Route to 500 error
 router.get("/detail/500", invController.buildFootError);
 
