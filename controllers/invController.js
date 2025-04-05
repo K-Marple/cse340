@@ -308,40 +308,6 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 };
 
-/* ********************
- * Build search inventory
- * ******************** */
-invCont.buildSearchInventory = async function (req, res, next) {
-  let nav = await utilities.getNav();
-  res.render("/inventory/search", {
-    title: "Search Inventory",
-    nav,
-  });
-};
-
-/* ********************
- * Return inventory by search results
- * ******************** */
-invCont.searchInventory = async (req, res, next) => {
-  let nav = await utilities.getNav();
-  const inv_make = parseInt(req.params.inv_make);
-  const inv_model = parseInt(req.params.inv_model);
-  const invData = await invModel.getInventoryByMakeOrModel(inv_make, inv_model);
-  const grid = await utilities.buildClassificationGrid(invData);
-  if (invData) {
-    res.render("inventory/searchResults", {
-      title: "Search Results",
-      nav,
-      errors,
-      grid,
-      inv_make,
-      inv_model,
-    });
-  } else {
-    next(new Error("No data returned"));
-  }
-};
-
 // Error in footer
 invCont.buildFootError = async function (req, res, next) {
   const message = "Sorry, we are experiencing internal server issues.";
