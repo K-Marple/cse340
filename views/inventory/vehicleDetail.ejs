@@ -1,10 +1,30 @@
 <!-- Content Heading -->
 <% if (title) { %>
-<h1><%= title %></h1>
+    <h1><%= title %></h1>
 <% } else {res.redirect('/')}%>
 
 <!-- Message Block -->
-<%# messages %>
+<%- messages() %>
 
 <!-- Main Content (Vehicle Details) -->
 <%- grid %>
+<div class="review">
+    <h2>Reviews</h2>
+    reviews
+    <% if (locals.loggedin) { %>
+        <form id="review" action="/inv/:inv_id/review" method="post">
+            <label>Screen Name</label>
+            <input type="text" id="screenName" value="<%- locals.accountData.account_firstname.substring(0,1).toLowerCase() + locals.accountData.account_lastname.toLowerCase() %>" readonly>
+            <label>Add Review</label>
+            <input type="text" id="reveiw" required>
+            <input type="submit" value="Add Review">
+            <input type="hidden" name="inv_id"
+                <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+                <% } %>>
+            <input type="hidden" name="account_id"
+                <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+                <% } %>>
+        </form>
+    <% } else { %>
+        <p>To add a review, you must be logged in. Click to <a href="/account/login">log in</a> or <a href="/account/registration">create an account</a>.</p>
+    <% } %>
