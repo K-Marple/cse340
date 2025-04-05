@@ -24,6 +24,12 @@
         <h3>Update Account</h3>
         <p><a href="../account/update">Update Account Information</a></p>
     </div>
+    <div class="review-box">
+        <h3>My Reviews</h3>
+        <% if (reviewsExist) { %>
+            <p><%= reviewsExist %></p>
+        <% } %>
+    </div>
 <% } else if (locals.accountData.account_type == "Employee" || locals.accountData.account_type == "Admin") { %>
     <h2 class="welcome-msg">Welcome <%= locals.accountData.account_firstname %></h2>
     <div class=update-box>

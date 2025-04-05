@@ -8,9 +8,7 @@ const invCont = {};
  * ******************** */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
-  console.log("buildbyclassid called");
   const data = await invModel.getInventoryByClassificationId(classification_id);
-  console.log("model function called in build");
   const grid = await utilities.buildClassificationGrid(data);
   let nav = await utilities.getNav();
   const className = data[0].classification_name;
@@ -31,10 +29,13 @@ invCont.buildByInventoryId = async function (req, res, next) {
   let nav = await utilities.getNav();
   const make = data[0].inv_make;
   const model = data[0].inv_model;
+  const reviewData = await invModel.getReviewsByInvId(inv_id);
+  const existingReviews = reviewData[0];
   res.render("./inventory/vehicleDetail", {
     title: make + " " + model,
     nav,
     grid,
+    existingReviews,
   });
 };
 

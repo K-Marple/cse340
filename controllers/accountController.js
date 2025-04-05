@@ -141,10 +141,14 @@ async function accountLogin(req, res) {
  ***********************/
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav();
+  const account_id = req.body.account_id;
+  const reviewData = await accModel.getReviewsByAccId(account_id);
+  const reviewsExist = reviewData[0];
   res.render("account/management", {
     title: "Account Management",
     nav,
     errors: null,
+    reviewsExist,
   });
 }
 

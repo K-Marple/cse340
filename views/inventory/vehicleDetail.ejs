@@ -10,7 +10,9 @@
 <%- grid %>
 <div class="review">
     <h2>Reviews</h2>
-    reviews
+    <% if (existingReviews) { %>
+        <p><%= existingReviews %></p>
+    <% } %>    
     <% if (locals.loggedin) { %>
         <form id="review" action="/inv/:inv_id/review" method="post">
             <label>Screen Name</label>
