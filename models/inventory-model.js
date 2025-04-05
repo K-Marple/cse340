@@ -1,4 +1,3 @@
-const { searchInventory } = require("../controllers/invController");
 const pool = require("../database/");
 
 /* ***************************
@@ -14,6 +13,7 @@ async function getClassifications() {
  * Get all inventory items and classification_name by classification_id
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
+  console.log("getinvbyclassid function called");
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory AS i
@@ -171,4 +171,5 @@ module.exports = {
   addClassification,
   addInventory,
   updateInventory,
+  deleteInventoryItem,
 };
