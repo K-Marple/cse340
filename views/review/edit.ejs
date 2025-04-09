@@ -1,0 +1,36 @@
+<!-- Title -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+<!-- Messages -->
+<%- messages() %>
+
+<!-- Errors -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<!-- Main Content -->
+<form id="updateForm" class="editReview" action="/update" method="post">
+    <label>Review</label>
+    <input type="text" id="reviewText" name="review_text" value="<%= locals.review_text %>" required>
+    <input type="submit" value="Edit Review" disabled>
+    <input type="hidden" name="review_id"
+    <% if(locals.review_id) { %> value="<%= locals.review_id %>"
+    <% } %>>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+    <input type="hidden" name="account_id"
+    <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+    <% } %>>
+</form>
+
+<script src="../../js/review-update.js"></script>

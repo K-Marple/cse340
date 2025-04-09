@@ -29,17 +29,32 @@ async function getReviewsByAccId(account_id) {
 /* ****************
  * Update reviews
  * ****************/
-async function getReviewsByAccId(account_id) {
+async function updateReview(review_id, review_text) {
   try {
-    const sql = `SELECT * FROM review WHERE account_id = $1`;
-    const data = await pool.query(sql, [account_id]);
-    return data;
+    const sql = `UPDATE review SET review_text = $1, WHERE review_id = $1 RETURNING *`;
+    const data = await pool.query(sql, [review_text, review_id]);
+    return data.rows[0];
   } catch (error) {
     return error.message;
+  }
+}
+
+/* ****************
+ * Delete review in database
+ * **************** */
+async function deleteReview(review_id) {
+  try {
+    const sql = `DELETE FROM review WHERE review_id = $1`;
+    const data = await pool.query(sql, [review_id]);
+    return data;
+  } catch (error) {
+    new Error("Delete Error");
   }
 }
 
 module.exports = {
   getReviewsByInvId,
   getReviewsByAccId,
+  updateReview,
+  deleteReview,
 };

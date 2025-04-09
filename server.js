@@ -19,6 +19,7 @@ const accountRoute = require("./routes/accountRoute");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const accController = require("./controllers/accountController");
+const reviewRoute = require("./routes/reviewRoute");
 
 /* ***********************
  * Middleware
@@ -74,6 +75,8 @@ app.get("/logout", (req, res) => {
   res.clearCookie("jwt");
   return res.redirect("/");
 });
+// Review routes
+app.use("/review", reviewRoute);
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({ status: 404, message: "You look lost. Recalculating..." });

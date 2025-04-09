@@ -267,9 +267,9 @@ Util.buildReviewAcc = async function (data) {
       "<br>" +
       Intl.DateTimeFormat("en-US", options).format(row.review_date);
     list += "</ul>";
-    list += "<a href='review/edit'>Edit</a>";
+    list += "<a href='../review/edit'>Edit</a>";
     list += " ";
-    list += "<a href='reveiw/delete'>Delete</a>";
+    list += "<a href='../reveiw/delete'>Delete</a>";
   });
   list += "</div>";
   return list;

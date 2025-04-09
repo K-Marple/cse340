@@ -1,0 +1,29 @@
+<!-- Title -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+    
+<!-- Messages -->
+<%- messages() %>
+
+<!-- Errors -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+    
+<!-- Main Content -->
+<form id="deleteForm" class="deleteReview" action="/deleted" method="post">
+    <p>Please confirm the following deletion. This action is permanent and cannot be undone.</p>
+    <label>Review</label>
+    <input type="text" id="reviewText" name="review_text" value="<%= locals.review_text %>" required readonly>
+    <input type="submit" value="Delete Review">
+    <input type="hidden" name="review_id"
+    <% if(locals.review_id) { %> value="<%= locals.review_id %>"
+    <% } %>>
+</form>
