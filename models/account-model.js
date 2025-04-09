@@ -135,19 +135,6 @@ async function changePassword(account_password, account_id) {
   }
 }
 
-/* ****************
- * Get reviews from database by account
- * ****************/
-async function getReviewsByAccId(account_id) {
-  try {
-    const sql = `SELECT * FROM review WHERE account_id = $1`;
-    const data = await pool.query(sql, [account_id]);
-    return data;
-  } catch (error) {
-    return error.message;
-  }
-}
-
 module.exports = {
   registerAccount,
   checkExistingEmail,
@@ -157,5 +144,4 @@ module.exports = {
   getAccountById,
   updateAccount,
   changePassword,
-  getReviewsByAccId,
 };

@@ -150,19 +150,6 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
-/* ***************************
- * Get reviews from database by inventory
- * ************************** */
-async function getReviewsByInvId(inv_id) {
-  try {
-    const sql = `SELECT * FROM public.review WHERE inv_id = $1 ORDER BY review_date`;
-    const data = await pool.query(sql, [inv_id]);
-    return data;
-  } catch (error) {
-    new Error("Review Error");
-  }
-}
-
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -171,5 +158,4 @@ module.exports = {
   addInventory,
   updateInventory,
   deleteInventoryItem,
-  getReviewsByInvId,
 };
