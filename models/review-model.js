@@ -27,13 +27,40 @@ async function getReviewsByAccId(account_id) {
 }
 
 /* ****************
+ * Get reviews from database by account
+ * ****************/
+async function getReviewsByReviewId(review_id) {
+  try {
+    const sql = `SELECT * FROM review WHERE review_id = $1`;
+    const data = await pool.query(sql, [review_id]);
+    return data.rows;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+/* ****************
  * Update reviews
  * ****************/
-async function updateReview(review_id, review_text) {
+async function updateReview(
+  review_id,
+  review_text,
+  review_date,
+  inv_id,
+  account_id
+) {
   try {
-    const sql = `UPDATE review SET review_text = $1, WHERE review_id = $1 RETURNING *`;
-    const data = await pool.query(sql, [review_text, review_id]);
-    return data.rows[0];
+    const sql = `UPDATE review 
+    SET review_text = $1, review_date = $2, inv_id = $3, 
+    account_id = $4 WHERE review_id = $5 RETURNING *`;
+    const data = await pool.query(sql, [
+      review_text,
+      review_date,
+      inv_id,
+      account_id,
+      review_id,
+    ]);
+    return data.rows;
   } catch (error) {
     return error.message;
   }
@@ -55,6 +82,7 @@ async function deleteReview(review_id) {
 module.exports = {
   getReviewsByInvId,
   getReviewsByAccId,
+  getReviewsByReviewId,
   updateReview,
   deleteReview,
 };

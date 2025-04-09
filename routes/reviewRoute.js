@@ -6,14 +6,17 @@ const revController = require("../controllers/reviewController");
 const revValidate = require("../utilities/review-validation");
 
 // Build review edit
-router.get("/edit", utilities.handleErrors(revController.buildEdit));
+router.get("/edit/:review_id", utilities.handleErrors(revController.buildEdit));
 
 // Build review delete
-router.get("/delete", utilities.handleErrors(revController.buildDelete));
+router.get(
+  "/delete/:review_id",
+  utilities.handleErrors(revController.buildDelete)
+);
 
 // Process edit data
 router.post(
-  "/update",
+  "/updated",
   revValidate.updateRules(),
   revValidate.checkUpdateData,
   utilities.handleErrors(revController.updateReview)

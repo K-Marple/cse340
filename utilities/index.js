@@ -228,6 +228,9 @@ Util.checkAccount = async function (req, res, next) {
  * Build the review views on inventory detail
  ************************** */
 Util.buildReviewList = async function (data) {
+  const screenName =
+    res.locals.accountData.account_firstname.substring(0, 1).toLowerCase() +
+    res.locals.accountData.account_lastname.toLowerCase();
   let options = {
     weekday: "long",
     year: "numeric",
@@ -238,10 +241,9 @@ Util.buildReviewList = async function (data) {
   list = "<div class='reviewList'>";
   data.forEach((row) => {
     list += "<ul>";
-    list +=
-      row.review_text +
-      "<br>" +
-      Intl.DateTimeFormat("en-US", options).format(row.review_date);
+    list += screenName;
+    list += row.review_text;
+    list += Intl.DateTimeFormat("en-US", options).format(row.review_date);
     list += "</ul>";
   });
   list += "</div>";
@@ -267,9 +269,9 @@ Util.buildReviewAcc = async function (data) {
       "<br>" +
       Intl.DateTimeFormat("en-US", options).format(row.review_date);
     list += "</ul>";
-    list += "<a href='../review/edit'>Edit</a>";
+    list += "<a href='../review/edit/" + row.review_id + "'>Edit</a>";
     list += " ";
-    list += "<a href='../reveiw/delete'>Delete</a>";
+    list += "<a href='../reveiw/delete/" + row.review_id + "'>Delete</a>";
   });
   list += "</div>";
   return list;
