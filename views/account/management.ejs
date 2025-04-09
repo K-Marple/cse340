@@ -27,7 +27,7 @@
     <div class="review-box">
         <h3>My Reviews</h3>
         <% if (reviewsExist) { %>
-            <p><%= reviewsExist %></p>
+            <p><%- reviewsExist %></p>
         <% } %>
     </div>
 <% } else if (locals.accountData.account_type == "Employee" || locals.accountData.account_type == "Admin") { %>

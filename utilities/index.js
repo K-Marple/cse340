@@ -199,8 +199,6 @@ Util.checkLogin = (req, res, next) => {
 Util.checkAccount = async function (req, res, next) {
   const account_id = parseInt(res.locals.accountData.account_id);
   const data = await accModel.getAccountById(account_id);
-  console.log(account_id);
-  console.log(data.account_type);
   if (data.account_type == "Employee" || data.account_type == "Admin") {
     if (req.cookies.jwt) {
       jwt.verify(
@@ -224,6 +222,30 @@ Util.checkAccount = async function (req, res, next) {
     req.flash("Unauthorized Access.");
     res.redirect("/");
   }
+};
+
+/* ************************
+ * Build the review views on inventory detail
+ ************************** */
+Util.buildReviewList = async function (data) {
+  let options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  let list;
+  list = "<div class='reviewList'>";
+  data.forEach((row) => {
+    list += "<ul>";
+    list +=
+      row.review_text +
+      "<br>" +
+      Intl.DateTimeFormat("en-US", options).format(row.review_date);
+    list += "</ul>";
+  });
+  list += "</div>";
+  return list;
 };
 
 module.exports = Util;

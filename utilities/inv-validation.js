@@ -186,7 +186,6 @@ validate.checkUpdateData = async (req, res, next) => {
     const classificationSelect = await utilities.buildClassificationList(
       classification_id
     );
-    console.log(classificationSelect);
     res.render("inventory/editInventory", {
       errors,
       title: "Edit " + itemName,
