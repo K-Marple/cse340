@@ -141,9 +141,9 @@ async function accountLogin(req, res) {
  ***********************/
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav();
-  const account_id = req.body.account_id;
+  const account_id = res.locals.accountData.account_id;
   const reviewData = await accModel.getReviewsByAccId(account_id);
-  const reviewsExist = reviewData[0];
+  const reviewsExist = await utilities.buildReviewAcc(reviewData.rows);
   res.render("account/management", {
     title: "Account Management",
     nav,

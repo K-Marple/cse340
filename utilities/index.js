@@ -248,4 +248,31 @@ Util.buildReviewList = async function (data) {
   return list;
 };
 
+/* ************************
+ * Build the review views on account management
+ ************************** */
+Util.buildReviewAcc = async function (data) {
+  let options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  let list;
+  list = "<div class='reviewAcc'>";
+  data.forEach((row) => {
+    list += "<ul>";
+    list +=
+      row.review_text +
+      "<br>" +
+      Intl.DateTimeFormat("en-US", options).format(row.review_date);
+    list += "</ul>";
+    list += "<a href='review/edit'>Edit</a>";
+    list += " ";
+    list += "<a href='reveiw/delete'>Delete</a>";
+  });
+  list += "</div>";
+  return list;
+};
+
 module.exports = Util;
