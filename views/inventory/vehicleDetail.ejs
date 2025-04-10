@@ -10,13 +10,13 @@
 <%- grid %>
 <div class="review">
     <h2>Reviews</h2>
-    <p><%- existingReviews %></p>   
+    <%- existingReviews %>   
     <% if (locals.loggedin) { %>
         <form id="review" action="/inv/:inv_id/review" method="post">
             <label>Screen Name</label>
             <input type="text" id="screenName" value="<%- locals.accountData.account_firstname.substring(0,1).toLowerCase() + locals.accountData.account_lastname.toLowerCase() %>" readonly>
             <label>Add Review</label>
-            <input type="text" id="reveiw" required>
+            <textarea id="reveiw" required></textarea>
             <input type="submit" value="Add Review">
             <input type="hidden" name="inv_id"
                 <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"

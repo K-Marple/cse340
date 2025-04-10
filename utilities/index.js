@@ -228,9 +228,11 @@ Util.checkAccount = async function (req, res, next) {
  * Build the review views on inventory detail
  ************************** */
 Util.buildReviewList = async function (data) {
-  const screenName =
-    res.locals.accountData.account_firstname.substring(0, 1).toLowerCase() +
-    res.locals.accountData.account_lastname.toLowerCase();
+  // const accountInfo = await accModel.getAccountById(account);
+  // console.log(accountInfo);
+  // const screenName =
+  //   req.params.account_firstname.substring(0, 1).toLowerCase() +
+  //   res.account_lastname.toLowerCase();
   let options = {
     weekday: "long",
     year: "numeric",
@@ -241,7 +243,7 @@ Util.buildReviewList = async function (data) {
   list = "<div class='reviewList'>";
   data.forEach((row) => {
     list += "<ul>";
-    list += screenName;
+    // list += screenName;
     list += row.review_text;
     list += Intl.DateTimeFormat("en-US", options).format(row.review_date);
     list += "</ul>";

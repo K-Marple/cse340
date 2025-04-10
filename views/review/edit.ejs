@@ -20,7 +20,7 @@
 <!-- Main Content -->
 <form id="updateForm" class="editReview" action="/updated" method="post">
     <label>Review</label>
-    <input type="text" id="reviewText" name="review_text" value="<%= locals.review_text %>" required>
+    <textarea id="reviewText" name="review_text" required><%= locals.review_text %></textarea>
     <input type="submit" value="Edit Review" disabled>
     <input type="hidden" name="review_id"
     <% if(locals.review_id) { %> value="<%= locals.review_id %>"
