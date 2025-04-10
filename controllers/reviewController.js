@@ -21,13 +21,13 @@ async function buildEdit(req, res, next) {
  ***********************/
 async function buildDelete(req, res, next) {
   let nav = await utilities.getNav();
-  const review_id = parseInt(req.body.review_id);
+  const review_id = parseInt(req.params.review_id);
   const review = await revModel.getReviewsByReviewId(review_id);
   res.render("review/delete", {
     title: "Delete Review",
     nav,
     errors: null,
-    review_text: review.review_text,
+    review_text: review[0].review_text,
   });
 }
 
