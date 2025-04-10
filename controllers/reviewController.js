@@ -32,6 +32,40 @@ async function buildDelete(req, res, next) {
 }
 
 /* ********************
+ * Process adding review
+ * ******************** */
+async function addReview(req, res, next) {
+  let nav = await utilities.getNav();
+  const { review_text } = req.body;
+  const reviewResult = await revModel.addReview(review_text);
+  const inv_id = req.params.invId;
+  const data = await invModel.getInventoryByInventoryId(inv_id);
+  const grid = await utilities.buildInventoryGrid(data);
+  const make = data[0].inv_make;
+  const model = data[0].inv_model;
+  const reviewData = await revModel.getReviewsByInvId(inv_id);
+  const existingReviews = await utilities.buildReviewList(reviewData.rows);
+  if (reviewResult) {
+    req.flash("notice", `You have added a review.`);
+    res.status(201).render("inventory/vehicleDetail", {
+      title: make + " " + model,
+      nav,
+      grid,
+      existingReviews,
+    });
+  } else {
+    req.flash("notice", "Sorry, unable to add review.");
+    res.status(501).render("inventory/vehicleDetail", {
+      title: make + " " + model,
+      nav,
+      grid,
+      existingReviews,
+      errors,
+    });
+  }
+}
+
+/* ********************
  * Process editing review
  ***********************/
 async function updateReview(req, res, next) {
@@ -89,6 +123,7 @@ async function deleteReview(req, res, next) {
 module.exports = {
   buildEdit,
   buildDelete,
+  addReview,
   updateReview,
   deleteReview,
 };

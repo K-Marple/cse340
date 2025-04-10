@@ -40,6 +40,21 @@ async function getReviewsByReviewId(review_id) {
 }
 
 /* ****************
+ * Add reviews
+ * ****************/
+async function addReview(review_text) {
+  try {
+    const sql = `INSERT INTO review 
+      (review_text) 
+      VALUES ($1) 
+      RETURNING *`;
+    return await pool.query(sql, [review_text]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
+/* ****************
  * Update reviews
  * ****************/
 async function updateReview(
@@ -83,6 +98,7 @@ module.exports = {
   getReviewsByInvId,
   getReviewsByAccId,
   getReviewsByReviewId,
+  addReview,
   updateReview,
   deleteReview,
 };

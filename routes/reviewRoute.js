@@ -14,6 +14,9 @@ router.get(
   utilities.handleErrors(revController.buildDelete)
 );
 
+// Process add review
+router.post("/inv/review", utilities.handleErrors(revController.addReview));
+
 // Process edit data
 router.post(
   "/updated",
